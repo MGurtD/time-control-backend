@@ -9,5 +9,8 @@ namespace TimeControl.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
+
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

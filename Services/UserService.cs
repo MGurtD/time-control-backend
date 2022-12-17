@@ -3,9 +3,9 @@ using Microsoft.Extensions.Options;
 
 namespace TimeControl.Services;
 
-public class EnterpriseService : BaseService<Enterprise>
+public class UserService : BaseService<Enterprise>
 {
-    public EnterpriseService(IOptions<DatabaseSettings> databaseSettings) :
+    public UserService(IOptions<DatabaseSettings> databaseSettings) :
         base(databaseSettings, databaseSettings.Value.EnterpriseCollectionName)
     { }
 }
