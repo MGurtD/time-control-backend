@@ -63,9 +63,9 @@ public class EnterpriseController : ControllerBase
     [HttpDelete("{id:length(24)}")]
     public async Task<IActionResult> Delete(string id)
     {
-        var book = await _enterpriseService.GetAsync(id);
+        var enterprise = await _enterpriseService.GetAsync(id);
 
-        if (book is null)
+        if (enterprise is null)
         {
             return NotFound();
         }
