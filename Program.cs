@@ -8,7 +8,8 @@ builder.Services.Configure<DatabaseSettings>(
 
 // Add services to the container.
 builder.Services.AddSingleton<EnterpriseService>();
-builder.Services.AddSingleton<RoleService>();
+builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<TimePeriodService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -8,6 +8,6 @@ public class DatabaseSettings
 
     public string EnterpriseCollectionName { get; set; } = null!;
     public string UserCollectionName { get; set; } = null!;
-    public string RoleCollectionName { get; set; } = null!;
+    public string TimePeriodCollectionName { get; set; } = null!;
 
 }

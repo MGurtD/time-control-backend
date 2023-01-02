@@ -12,5 +12,6 @@ namespace TimeControl.Models
 
         public DateTime? CreatedOn { get; set; }
         public DateTime? UpdatedAt { get; set; }
+
     }
 }

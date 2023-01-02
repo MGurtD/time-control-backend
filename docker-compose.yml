@@ -3,14 +3,19 @@ version: '3.1'
 
 services:
 
-  mongo:
+  database:
     image: mongo
-    container_name: mongodb
+    container_name: time-control-db
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: Carretera1
     ports:
       - "27017:27017"
     volumes:
-      - "/Users/marcgurt/data/:/data/db"
+      - "C:/Users/mgurt/source/personal/data:/data/db"
     restart: always
+  api:
+    container_name: time-control-api
+    build: .
+    ports:
+      - "5050:80"
