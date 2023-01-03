@@ -14,5 +14,29 @@ public class UserService : BaseService<User>
         Task task = base.CreateIndexAsync(indexKeysDefinition);
         task.Wait();
     }
-    
+
+    public async Task<LoginFormResult> CheckLoginForm(LoginForm loginForm) {
+
+        var user = await GetByUsernameAsync(loginForm.Username);
+        if (user == null)
+        {
+            return LoginFormResult.NotFound;
+        }
+
+        if (user.EnterpriseId != loginForm.Enterprise) 
+        {
+            return LoginFormResult.NotFoundInEnterpise;
+        }
+
+        if (user.Password != loginForm.Password) {
+            return LoginFormResult.IncorrectPassword;
+        }
+
+        return LoginFormResult.Ok;
+    }    
+
+    public async Task<User?> GetByUsernameAsync(string username) {
+
+        return await Collection.Find(x => x.Username == username).FirstOrDefaultAsync();
+    }
 }

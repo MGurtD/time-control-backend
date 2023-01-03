@@ -36,6 +36,27 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
+    [Route("Login")]
+    public async Task<IActionResult> Login(LoginForm loginForm)
+    {
+        var result = await _userService.CheckLoginForm(loginForm);
+        switch(result) 
+        {
+            case LoginFormResult.NotFound:
+                return NotFound($"Username {loginForm.Username} does not exist");
+            case LoginFormResult.NotFoundInEnterpise:
+                return NotFound($"Username {loginForm.Username} does not exist in the selected enterprise");
+            case LoginFormResult.IncorrectPassword:
+                return Unauthorized("Incorrect password");
+            case LoginFormResult.Ok:
+                var user = await _userService.GetByUsernameAsync(loginForm.Username);
+                return Ok(user);
+            default:
+                return Problem();
+        }
+    }
+
+    [HttpPost]
     public async Task<IActionResult> Post(User user)
     {
         await _userService.CreateAsync(user);
