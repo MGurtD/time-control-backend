@@ -1,14 +1,9 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace TimeControl.Models;
+namespace TimeControl.Dtos;
 
 public class LoginForm
 {
     public string Username { get; set; } = null!;
     public string Password { get; set; } = null!;
-
-    [BsonRepresentation(BsonType.ObjectId)]
     public string? Enterprise { get; set; }
 
 }

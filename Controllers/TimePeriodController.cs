@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using TimeControl.Dtos;
 using TimeControl.Models;
 using TimeControl.Services;
 
@@ -22,9 +23,9 @@ public class TimePeriodController : ControllerBase
     public async Task<List<TimePeriod>> Get() =>
         await _timePeriodService.GetAsync();
 
-    [HttpGet("{userid:length(24)}")]
-    public async Task<ActionResult<List<TimePeriod>>> GetByUserId(string userId) =>
-        await _timePeriodService.GetByUserIdAsync(userId);
+    [HttpGet("{id:length(24)}")]
+    public async Task<ActionResult<List<TimePeriodReadDto>>> GetByUserId(string id) =>
+        await _timePeriodService.GetByUserIdAsync(id);
 
     [HttpPost]
     public async Task<IActionResult> Post(TimePeriod timePeriod)
@@ -38,7 +39,6 @@ public class TimePeriodController : ControllerBase
     public async Task<IActionResult> Update(string id, TimePeriod updatedTimePeriod)
     {
         var timePeriod = await _timePeriodService.GetAsync(id);
-
         if (timePeriod is null)
         {
             return NotFound();
@@ -54,9 +54,8 @@ public class TimePeriodController : ControllerBase
     [HttpDelete("{id:length(24)}")]
     public async Task<IActionResult> Delete(string id)
     {
-        var role = await _timePeriodService.GetAsync(id);
-
-        if (role is null)
+        var timePeriod = await _timePeriodService.GetAsync(id);
+        if (timePeriod is null)
         {
             return NotFound();
         }

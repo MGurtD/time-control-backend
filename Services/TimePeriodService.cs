@@ -1,6 +1,7 @@
 using TimeControl.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using TimeControl.Dtos;
 
 namespace TimeControl.Services;
 
@@ -15,7 +16,16 @@ public class TimePeriodService : BaseService<TimePeriod>
         task.Wait();
     }
 
-    public async Task<List<TimePeriod>> GetByUserIdAsync(string userId) =>
-        await base.Collection.Find(x => x.UserId == userId).ToListAsync(); 
+    public async Task<List<TimePeriodReadDto>> GetByUserIdAsync(string userId) {
+        List<TimePeriodReadDto> timePeriodDtos = new List<TimePeriodReadDto>();
+        List<TimePeriod> timePeriods = await base.Collection.Find(x => x.UserId == userId).ToListAsync();
+
+        foreach (var timePeriod in timePeriods)
+        {
+            timePeriodDtos.Add(new TimePeriodReadDto(timePeriod));
+        }
+
+        return timePeriodDtos;
+    }
     
 }
