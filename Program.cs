@@ -23,6 +23,7 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowCredentials()
             .SetIsOriginAllowed((host) => true)
+            .WithOrigins("https://timecontrol.netlify.app")
             .AllowAnyHeader());
 });
 
